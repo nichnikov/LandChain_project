@@ -156,15 +156,16 @@ prompt = ChatPromptTemplate.from_messages(
             "system",
             "You are a helpful assistant that translates {input_language} to {output_language}.",
         ),
-        ("human", "{input}"),
+        ("human", "{query}"),
     ]
 )
 
 chain = prompt | llm
 r2 = chain.invoke(
     {
-        "prompt_1": "prompt_1",
-        "prompt_2": "prompt_2",
+        "prompt_1": prompt_1,
+        "prompt_2": prompt_2,
+        "prompt_3": prompt_3,
         "input": "I love programming.",
     }
 ).content
