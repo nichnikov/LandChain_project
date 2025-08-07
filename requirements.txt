@@ -2,5 +2,5 @@ langchain
 langchain_experimental
 langsmith
 openai
--qU "langchain[openai]"
+# -qU "langchain[openai]"
 jinja2

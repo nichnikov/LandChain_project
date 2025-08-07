@@ -1,9 +1,20 @@
 """
 https://python.langchain.com/docs/integrations/chat/openai/
 """
-
+import os
+import getpass
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+
+
+if not os.environ.get("API_KEY"):
+  os.environ["API_KEY"] = getpass.getpass("Enter API key for LLM: ")
+
+if not os.environ.get("BASE_URL"):
+  os.environ["BASE_URL"] = getpass.getpass("Enter BASE_URL for LLM: ")
+
+API_KEY = os.environ.get("API_KEY")
+BASE_URL = os.environ.get("BASE_URL")
 
 
 llm = ChatOpenAI(
@@ -12,8 +23,8 @@ llm = ChatOpenAI(
     max_tokens=None,
     timeout=None,
     max_retries=2,
-    api_key="sk-or-vv-17bd53f8f505e0a1d24a3bf0a8bb702e13edbc78c89ac9aa41f6bda7ec72270c",  # if you prefer to pass api key in directly instaed of using env vars
-    base_url="https://api.vsegpt.ru/v1",
+    api_key=API_KEY,
+    base_url=BASE_URL,
     # organization="...",
     # other params...
 )
