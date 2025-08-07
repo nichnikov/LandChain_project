@@ -6,7 +6,8 @@
 
 Сначала исправим опечатки в именах переменных для ясности (gem -> ger, span -> spa).
 """
-
+import os
+import getpass
 
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -14,16 +15,28 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from operator import itemgetter # <-- Важный импорт для извлечения данных
 
-# --- Инициализация модели (без изменений) ---
+if not os.environ.get("API_KEY"):
+  os.environ["API_KEY"] = getpass.getpass("Enter API key for LLM: ")
+
+if not os.environ.get("BASE_URL"):
+  os.environ["BASE_URL"] = getpass.getpass("Enter BASE_URL for LLM: ")
+
+API_KEY = os.environ.get("API_KEY")
+BASE_URL = os.environ.get("BASE_URL")
+
+
 llm = ChatOpenAI(
     model="gpt-4o",
     temperature=0,
     max_tokens=None,
     timeout=None,
     max_retries=2,
-    base_url="https://api.vsegpt.ru/v1",
-    api_key="sk-or-vv-17bd53f8f505e0a1d24a3bf0a8bb702e13edbc78c89ac9aa41f6bda7ec72270c",
+    api_key=API_KEY,
+    base_url=BASE_URL,
+    # organization="...",
+    # other params...
 )
+
 
 # --- Определяем все промпты и парсер (для ясности) ---
 prompt_eng_to_ger = ChatPromptTemplate.from_messages([
