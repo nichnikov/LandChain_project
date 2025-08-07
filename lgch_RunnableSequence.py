@@ -124,6 +124,8 @@ else:
 
     # Теперь результат - это полный словарь со всеми промежуточными шагами
     print(result)
+    print(type(result))
+    print(result["russian_text"])
 
     # Ожидаемый вывод:
     # {
