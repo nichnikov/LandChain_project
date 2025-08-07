@@ -1,10 +1,12 @@
 """
 https://python.langchain.com/docs/integrations/chat/openai/
 """
-import os
-import getpass
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+
+import os
+import getpass
 
 
 if not os.environ.get("API_KEY"):
